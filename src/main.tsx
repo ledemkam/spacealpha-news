@@ -2,6 +2,8 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Apod, Home, Hubble, Landing, News, Spacex, Webb} from './pages'
+import { newsPageLoader } from './lib/axios/config'
+import { ErrorElement } from './components'
 
 
 const router = createBrowserRouter([
@@ -30,7 +32,9 @@ const router = createBrowserRouter([
   },
   {
     path:"news",
-    element: <News/>
+    element: <News/>,
+    loader: newsPageLoader,
+    errorElement: <ErrorElement/>
   }
 ]
   }

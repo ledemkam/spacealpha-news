@@ -1,6 +1,54 @@
-const Footer = () => {
+import { ReactNode } from "react"
+import { Link } from "react-router-dom"
+
+const Footer = () : ReactNode=> {
   return (
-    <footer className="test">Footer</footer>
+    <footer className="bg-black text-white">
+    <div className="align-element min-h-[15vh] flex flex-col justify-center items-center">
+      <p className="my-2">-2024-</p>
+      <p className="mars-font text-2xl my-4 text-center">alphaSpace, by ledemkam</p>
+      <p className="underline">resourcen:</p>
+      <p className="text-center">
+          <Link to={"https://www.nasa.gov/"} target="_blank">
+            Nasa
+          </Link>
+          |<Link to={"https://api.nasa.gov"} target="_blank">
+            Nasa API
+          </Link>
+          |<Link to={"https://www.youtube.com/@NASA"} target="_blank">
+           Youtube
+           </Link>
+        </p>
+        <p>
+          <Link to={"https://www.nasa.gov/"} target="_blank">JWST</Link>
+        </p>
+        <p><Link to={"https://jwstapi.com"} target="_blank">JWST API </Link></p>
+        <p>
+					<Link to={"https://www.esa.int/"} target="_blank">
+						ESA
+					</Link>
+				</p>
+				<p>
+					<Link to={"https://www.spacex.com/"} target="_blank">
+						SpaceX
+					</Link>
+					|
+					<Link to={"https://api.spacexdata.com/v3/"} target="_blank">
+						SpaceX API
+					</Link>
+				</p>
+				<p>
+					<Link to={"https://www.datastro.eu/pages/home/"} target="_blank">
+						Datastro API
+					</Link>
+				</p>
+				<p className="mb-8">
+					<Link to={"https://www.spaceflightnewsapi.net/"} target="_blank">
+						SNAPI API
+					</Link>
+				</p>
+      </div>
+    </footer>
   )
 }
 export default Footer
