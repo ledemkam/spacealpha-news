@@ -1,3 +1,5 @@
 export {default as Header} from './layout/Header'
 export {default as Footer} from './layout/Footer'
 export {default as Navbar} from './shared/Navbar'
+export {default as Linksmobile} from './shared/Linksmobile'
+export {default as LinksDesktop} from './shared/LinksDesktop'

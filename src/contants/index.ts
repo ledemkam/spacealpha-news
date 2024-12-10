@@ -1,4 +1,4 @@
-export const nabarLinks = [
+export const navLinks = [
     {
         route: '/',
         label: 'Home'
