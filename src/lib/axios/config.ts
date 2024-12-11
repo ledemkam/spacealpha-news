@@ -1,6 +1,6 @@
-import { FiltersParams, NewsResponse, NewsResponseWithParams } from "@/types";
+import { FiltersParams, HubbleImagesResponse, NewsResponse, NewsResponseWithParams } from "@/types";
 import { LoaderFunction } from "react-router-dom";
-import { snapiCustomFetch } from "./api";
+import { datastroCustomFetch, snapiCustomFetch } from "./api";
 
 const newsParams = {
     news_site_exclude: "SpacePolicyOnline.com",
@@ -8,6 +8,7 @@ const newsParams = {
     ordered: "date"
   }
   
+  //config api for news page
   export const newsPageLoader: LoaderFunction = async ({ request }): Promise<NewsResponseWithParams | null> => {
 	try {
 		const params: FiltersParams = Object.fromEntries([...new URL(request.url).searchParams.entries()]);
@@ -19,6 +20,17 @@ const newsParams = {
 			params: formattedParams,
 		});
 		return { response: response.data, params };
+	} catch (error) {
+		console.log(error);
+		return null;
+	}
+};
+
+//config api for hubble page
+export const hubblePageLoader: LoaderFunction = async (): Promise<HubbleImagesResponse|null> => {
+	try {
+		const response = await datastroCustomFetch.get<HubbleImagesResponse>("");
+		return response.data;
 	} catch (error) {
 		console.log(error);
 		return null;

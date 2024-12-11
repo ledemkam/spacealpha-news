@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Apod, Home, Hubble, Landing, News, Spacex, Webb} from './pages'
-import { newsPageLoader } from './lib/axios/config'
+import { hubblePageLoader, newsPageLoader } from './lib/axios/config'
 import { ErrorElement } from './components'
 
 
@@ -28,7 +28,9 @@ const router = createBrowserRouter([
   },
   {
     path:"hubble",
-    element: <Hubble/>
+    element: <Hubble/>,
+    loader: hubblePageLoader,
+    errorElement: <ErrorElement/>
   },
   {
     path:"news",

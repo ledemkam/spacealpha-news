@@ -1,3 +1,5 @@
+
+//news types
 export type News = {
 	id: number;
 	title: string;
@@ -25,6 +27,8 @@ export type FiltersParams = {
 };
 
 export type NewsResponseWithParams = { response: NewsResponse; params: FiltersParams };
+
+//huble types
 
 export type HubbleImage = {
 	photo_id: number;
