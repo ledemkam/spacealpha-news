@@ -1,4 +1,4 @@
-import { Overview, Title } from "@/components";
+import { FiltersForm, Overview, Title } from "@/components";
 import CardGrid from "@/components/shared/CardGrid";
 import {  useLoaderData } from "react-router-dom";
 
@@ -13,6 +13,7 @@ export default function News() {
   return (
     <section className="section">
       <Title title="All news" />
+      <FiltersForm item="item" mode="news" />
       <Overview objects={data} />
       <CardGrid objects={results} mode="news-page" />
     </section>
