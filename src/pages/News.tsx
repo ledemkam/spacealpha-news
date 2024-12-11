@@ -7,15 +7,18 @@ import {  useLoaderData } from "react-router-dom";
 
 
 export default function News() {
-  const data = useLoaderData();
-  const {results} = data
-  console.log(data)
+  const data = useLoaderData()  
+  const {response,params} = data
+  console.log(response)
+  console.log(params);
+  
   return (
     <section className="section">
       <Title title="All news" />
-      <FiltersForm item="item" mode="news" />
-      <Overview objects={data} />
-      <CardGrid objects={results} mode="news-page" />
+      <FiltersForm term={params.term} mode="news" key={params.term}/>
+      <Overview objects={data} /> 
+        <CardGrid objects={response.results} mode="news-page" />
+     
     </section>
   )
 }

@@ -1,11 +1,11 @@
-import { ISnapi } from "@/types"
+import {  NewsResponseWithParams } from "@/types"
 
 type OverviewProps = {
-    objects: ISnapi
+    objects: NewsResponseWithParams
 }
 
 const Overview = ({objects}:OverviewProps) => {
-    const number: number = objects.count
+    const number: number = objects.response.count
   return (
     <div className="my-6 text-xl">
         {number} matches

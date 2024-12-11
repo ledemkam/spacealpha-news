@@ -15,7 +15,7 @@ const NewsPageCard = ({news}: PropsCard) => {
         </div>
         <div className="p-2 overflow-hidden lg:col-span-3 h-[300px] md:h-[200px] lg:h-full">
             <p className="text-2xl font-bold">{news.title}</p>
-            <p>{news.publishedAt ? news.publishedAt.split("T")[0] : "Unknown date"}</p>
+            <p>{news.published_at.split("T")[0]}</p>
             <p className="flex items-center">
                 <span>{news.news_site}</span>
                 <span>|</span>

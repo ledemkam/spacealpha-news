@@ -1,4 +1,4 @@
-import { ISnapi } from "@/types";
+import { FiltersParams, NewsResponse, NewsResponseWithParams } from "@/types";
 import { LoaderFunction } from "react-router-dom";
 import { snapiCustomFetch } from "./api";
 
@@ -8,17 +8,19 @@ const newsParams = {
     ordered: "date"
   }
   
-  export const newsPageLoader : LoaderFunction = async (): Promise<ISnapi|null> => {
-     try {
-        const formatttedParams = {
-          ...newsParams
-        }
-        const reponse = await snapiCustomFetch.get<ISnapi>("",{
-          params: formatttedParams
-        });
-        return reponse.data;
-     } catch (error) {
-        console.error("Error fetching news", error);
-        return null;
-     }
-  }
+  export const newsPageLoader: LoaderFunction = async ({ request }): Promise<NewsResponseWithParams | null> => {
+	try {
+		const params: FiltersParams = Object.fromEntries([...new URL(request.url).searchParams.entries()]);
+		const formattedParams = {
+			search: params.term ? params.term : "",
+			...newsParams,
+		};
+		const response = await snapiCustomFetch.get<NewsResponse>("", {
+			params: formattedParams,
+		});
+		return { response: response.data, params };
+	} catch (error) {
+		console.log(error);
+		return null;
+	}
+};
