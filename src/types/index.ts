@@ -238,3 +238,8 @@ export type LandingPageNewsApodHubbles = {
 	apod: ApodType | null;
 	hubbles: HubbleImage[] | null;
 };
+
+export type INavLink ={
+	route: string,
+	label: string;
+}

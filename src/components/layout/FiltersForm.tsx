@@ -24,7 +24,7 @@ const FiltersForm = ({term,mode}: FilterProps): ReactNode=> {
           Search
         </Button>
         <Button type="button" variant="outline" size="lg">
-          <Link to="/news">Reset</Link>
+          <Link to={mode === "news" ? "/news" : "/hubble"}>Reset</Link>
         </Button>
       </div>
     </Form>
