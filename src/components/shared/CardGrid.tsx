@@ -1,9 +1,10 @@
-import { HubbleImage, News } from "@/types";
+import { HubbleImage, News, WebbImage } from "@/types";
 import NewsPageCard from "./NewsPageCard";
 import { ReactNode } from "react";
 import HubbleCard from "./HubbleCard";
+import ImageCard from "./ImageCard";
 
-const CardGrid = ({ objects, mode }: { objects: News[] | HubbleImage[]; mode: string }): ReactNode => {
+const CardGrid = ({ objects, mode }: { objects: News[] | HubbleImage[] | WebbImage[]; mode: string }): ReactNode => {
   if (mode === "hubble") {
     return (
       <div className="grid gap-2 auto-rows-fr grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-12">
@@ -17,6 +18,14 @@ const CardGrid = ({ objects, mode }: { objects: News[] | HubbleImage[]; mode: st
       <div className="grid grid-cols-1 gap-y-4 auto-rows-[600px] lg:auto-rows-[300px] mb-12">
         {(objects as News[]).map((item) => (
           <NewsPageCard news={item} key={item.id} />
+        ))}
+      </div>
+    );
+  }else if (mode === "webb") {
+    return (
+      <div className="grid gap-2 auto-rows-fr grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-12">
+        {(objects as WebbImage[]).map((item) => (
+          <ImageCard image={item} key={item.id} />
         ))}
       </div>
     );

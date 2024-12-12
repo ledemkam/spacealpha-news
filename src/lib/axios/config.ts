@@ -1,4 +1,4 @@
-import { ApodType, FiltersParams, HubbleImagesResponse, HubbleImagesResponseWithParams, NewsResponse, NewsResponseWithParams, WebbImage } from "@/types";
+import { ApodType, FiltersParams, HubbleImagesResponse, HubbleImagesResponseWithParams, News, NewsResponse, NewsResponseWithParams, WebbImage, WebbImagesResponse, WebbNewsAndImagery } from "@/types";
 import { LoaderFunction } from "react-router-dom";
 import { datastroCustomFetch, nasaCustomFetch, snapiCustomFetch, webbCustomFetch } from "./api";
 
@@ -59,10 +59,47 @@ export const apodPageLoader: LoaderFunction = async (): Promise<ApodType | null>
 };
 
 //config api for webb page
-export const webbPageLoader: LoaderFunction = async (): Promise<WebbImage | null> => {
+
+const webbParams = {
+    news_site_exclude: "SpacePolicyOnline.com",
+    limit: 9,
+    ordered: "date",
+	summary_contains: "webb"
+  }
+export const newsFetch  = async(): Promise<News[]|null> => {
 	try {
-		const response = await webbCustomFetch.get("");
-		return response.data;
+		
+		const response = await snapiCustomFetch.get<NewsResponse>("", {params: webbParams});
+		return response.data.results;
+	} catch (error) {
+		console.log(error);
+		return null;
+	}
+}
+
+const imageParams = {
+	page: 1,
+	perPage: 4,
+}
+
+export const imageryFetch = async(): Promise<WebbImage[] | null> => {	
+	try {
+		const response = await webbCustomFetch.get<WebbImagesResponse>("", {params: imageParams});
+		return response.data.body;
+	} catch (error) {
+		console.log(error);
+		return null;
+	}
+}
+
+
+
+
+export const webbPageLoader: LoaderFunction = async (): Promise<WebbNewsAndImagery|null> => {
+	try {
+		//promise.all
+		const [news, imagery] = await Promise.all([newsFetch(), imageryFetch()]);
+		return { news, imagery };
 	} catch (error) {
 		console.log(error);
 		return null;
