@@ -1,7 +1,6 @@
 import { ApodType, FiltersParams, HubbleImagesResponse, HubbleImagesResponseWithParams, NewsResponse, NewsResponseWithParams } from "@/types";
 import { LoaderFunction } from "react-router-dom";
 import { datastroCustomFetch, nasaCustomFetch, snapiCustomFetch } from "./api";
-//import { objectsPerPage } from "../utils";
 
 const newsParams = {
     news_site_exclude: "SpacePolicyOnline.com",
