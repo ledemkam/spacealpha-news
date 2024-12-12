@@ -12,3 +12,10 @@ export {default as FiltersForm} from './layout/FiltersForm'
 export {default as FormInput} from './layout/FormInput'
 export { default as HubbleLauncher } from './shared/HubbleLauncher'
 export { default as HubbleCard } from './shared/HubbleCard'
+export { default as ImageCard } from "./shared/ImageCard";
+export { default as SpaceXLauncher } from "./shared/SpaceXLauncher";
+export { default as WebbLauncher } from "./shared/Webblauncher";
+export { default as NewsLauncherHeader } from "./shared/NewsLauncherHeader";
+export { default as NewsLauncherSquaredCards } from "./shared/NewsLauncherSquaredCards";
+export { default as NewsLauncherBubbledCards } from "./shared/NewsLauncherBubbledCards";
+export { default as NewsBubble } from "./shared/NewsBubble";

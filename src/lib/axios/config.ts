@@ -1,4 +1,4 @@
-import { ApodType, FiltersParams, HubbleImagesResponse, HubbleImagesResponseWithParams, NewsResponse, NewsResponseWithParams } from "@/types";
+import { ApodType, FiltersParams, HubbleImagesResponse, HubbleImagesResponseWithParams, NewsResponse, NewsResponseWithParams, WebbImage } from "@/types";
 import { LoaderFunction } from "react-router-dom";
 import { datastroCustomFetch, nasaCustomFetch, snapiCustomFetch, webbCustomFetch } from "./api";
 
@@ -59,7 +59,7 @@ export const apodPageLoader: LoaderFunction = async (): Promise<ApodType | null>
 };
 
 //config api for webb page
-export const webbPageLoader: LoaderFunction = async (): Promise<ApodType | null> => {
+export const webbPageLoader: LoaderFunction = async (): Promise<WebbImage | null> => {
 	try {
 		const response = await webbCustomFetch.get("");
 		return response.data;
