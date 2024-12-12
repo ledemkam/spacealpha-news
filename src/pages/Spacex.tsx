@@ -1,14 +1,19 @@
-import {  Title } from "@/components"
+import {  CardGrid, Title } from "@/components"
+import RelatedNews from "@/components/shared/RelatedNews"
 import { useLoaderData } from "react-router-dom"
 
 const Spacex = () => {
-  const data = useLoaderData()
-  console.log(data);
+  const {news,rockets} = useLoaderData()
+  console.log(rockets);
+  
   
   return (
-    <section>
+    <section className="section">
       <Title title="SpaceX"/>
+       {news && <RelatedNews news={news} />}
       <Title title="Rockets"/>
+      {rockets && <CardGrid objects={rockets} mode="rockets"/>}
+
     </section>
   )
 }

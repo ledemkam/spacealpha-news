@@ -9,6 +9,7 @@ const WebbTelescopeSummary = () => {
 				width="100%"
 				allow="autoplay"
 				className="min-h-[500px]"
+				title="Webb Telescope"
 			></iframe>
 		</div>
 	);

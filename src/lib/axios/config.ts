@@ -5,6 +5,8 @@ import {
 	   HubbleImagesResponseWithParams,
 	   News, NewsResponse,
 	   NewsResponseWithParams,
+	   Rocket,
+	   SpaceXNewsAndRockets,
 	   WebbImage, WebbImagesResponse, WebbNewsAndImagery } from "@/types";
 import { LoaderFunction } from "react-router-dom";
 import { datastroCustomFetch, nasaCustomFetch, snapiCustomFetch, spacexCustomFetch, webbCustomFetch } from "./api";
@@ -112,27 +114,43 @@ export const webbPageLoader: LoaderFunction = async (): Promise<WebbNewsAndImage
 };
 
 //config api for SpaceX
+const startshipURL = "/rockets/starship";
+const falconNineURL = "/rockets/falcon9";
+const falconHeavyURL = "/rockets/falconheavy";
 
-const newsFetchforSpace  = async() => {
+const rocketUrls = [startshipURL,falconNineURL,falconHeavyURL];
+
+const newsFetchforSpace  = async():Promise<News[]|null> => {
 	try {
 		
-		const response = await snapiCustomFetch.get("", {params: newsParams});
-		return response.data;
+		const response = await snapiCustomFetch.get<NewsResponse>("", {params: newsParams});
+		return response.data.results;
 	} catch (error) {
 		console.log(error);
 		return null;
 	}
 }
-export const rocketsFetch = async ()=> {
+export const rocketFetch = async (rocketUrl: string):Promise<Rocket|null>=> {
 	try {
-		const response = await spacexCustomFetch.get("rockets/starship");
+		const response = await spacexCustomFetch.get<Rocket>(rocketUrl);
 		return response.data;
 	} catch (error) {
 		console.log(error);
 		return null;
 	}
 };
-export const spacexPageLoader: LoaderFunction = async ()=> {
+export const rocketsFetch = async (): Promise<(Rocket|null)[]|null> => {
+	try {
+		const response: (Rocket | null)[] = await Promise.all(rocketUrls.map(rocketUrl =>(rocketFetch(rocketUrl))));
+		return response;
+	} catch (error) {
+		console.log(error);
+		return null;
+	}
+};
+
+
+export const spacexPageLoader: LoaderFunction = async ():Promise<SpaceXNewsAndRockets|null>=> {
 	try {
 		const [news,rockets] = await Promise.all([newsFetchforSpace(),rocketsFetch()]);
 		return {news,rockets};
