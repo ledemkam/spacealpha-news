@@ -237,11 +237,14 @@ export type SpaceXNewsAndRockets = {
 	rockets: (Rocket | null)[] | null;
 };
 
+//types for Landing page
 export type LandingPageNewsApodHubbles = {
 	news: News[] | null;
 	apod: ApodType | null;
 	hubbles: HubbleImage[] | null;
 };
+
+//types for navbar
 
 export type INavLink ={
 	route: string,

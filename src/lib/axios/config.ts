@@ -1,11 +1,19 @@
-import { ApodType, FiltersParams, HubbleImagesResponse, HubbleImagesResponseWithParams, News, NewsResponse, NewsResponseWithParams, WebbImage, WebbImagesResponse, WebbNewsAndImagery } from "@/types";
+import { 
+	   ApodType, 
+	   FiltersParams,
+	   HubbleImagesResponse,
+	   HubbleImagesResponseWithParams,
+	   News, NewsResponse,
+	   NewsResponseWithParams,
+	   WebbImage, WebbImagesResponse, WebbNewsAndImagery } from "@/types";
 import { LoaderFunction } from "react-router-dom";
-import { datastroCustomFetch, nasaCustomFetch, snapiCustomFetch, webbCustomFetch } from "./api";
+import { datastroCustomFetch, nasaCustomFetch, snapiCustomFetch, spacexCustomFetch, webbCustomFetch } from "./api";
 
 const newsParams = {
     news_site_exclude: "SpacePolicyOnline.com",
     limit: 20,
-    ordered: "date"
+    ordered: "date",
+	summary_content: "spacex"
   }
   
   //config api for news page
@@ -66,7 +74,7 @@ const webbParams = {
     ordered: "date",
 	summary_contains: "webb"
   }
-export const newsFetch  = async(): Promise<News[]|null> => {
+const newsFetch  = async(): Promise<News[]|null> => {
 	try {
 		
 		const response = await snapiCustomFetch.get<NewsResponse>("", {params: webbParams});
@@ -92,14 +100,42 @@ export const imageryFetch = async(): Promise<WebbImage[] | null> => {
 	}
 }
 
-
-
-
 export const webbPageLoader: LoaderFunction = async (): Promise<WebbNewsAndImagery|null> => {
 	try {
 		//promise.all
 		const [news, imagery] = await Promise.all([newsFetch(), imageryFetch()]);
 		return { news, imagery };
+	} catch (error) {
+		console.log(error);
+		return null;
+	}
+};
+
+//config api for SpaceX
+
+const newsFetchforSpace  = async() => {
+	try {
+		
+		const response = await snapiCustomFetch.get("", {params: newsParams});
+		return response.data;
+	} catch (error) {
+		console.log(error);
+		return null;
+	}
+}
+export const rocketsFetch = async ()=> {
+	try {
+		const response = await spacexCustomFetch.get("rockets/starship");
+		return response.data;
+	} catch (error) {
+		console.log(error);
+		return null;
+	}
+};
+export const spacexPageLoader: LoaderFunction = async ()=> {
+	try {
+		const [news,rockets] = await Promise.all([newsFetchforSpace(),rocketsFetch()]);
+		return {news,rockets};
 	} catch (error) {
 		console.log(error);
 		return null;

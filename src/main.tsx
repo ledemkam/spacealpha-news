@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Apod, Home, Hubble, Landing, News, Spacex, Webb} from './pages'
-import { apodPageLoader, hubblePageLoader, newsPageLoader, webbPageLoader } from './lib/axios/config'
+import { apodPageLoader, hubblePageLoader, newsPageLoader, spacexPageLoader, webbPageLoader } from './lib/axios/config'
 import { ErrorElement } from './components'
 
 
@@ -16,7 +16,9 @@ const router = createBrowserRouter([
   },
   {
     path:"spacex",
-    element: <Spacex/>
+    loader: spacexPageLoader,
+    element: <Spacex/>,
+    errorElement: <ErrorElement/>
   },
   {
     path:"webb",
