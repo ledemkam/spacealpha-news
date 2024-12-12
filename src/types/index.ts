@@ -72,6 +72,8 @@ export type ApodType = {
 	url: string;
 };
 
+//types for Webb page
+
 export type WebbImage = {
 	id: string;
 	observation_id: string;
@@ -113,6 +115,8 @@ export type WebbNewsAndImagery = {
 	news: News[] | null;
 	imagery: WebbImage[] | null;
 };
+
+//types for SpaceX page
 
 export type Rocket = {
 	id: number;

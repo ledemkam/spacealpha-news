@@ -1,6 +1,6 @@
 import { ApodType, FiltersParams, HubbleImagesResponse, HubbleImagesResponseWithParams, NewsResponse, NewsResponseWithParams } from "@/types";
 import { LoaderFunction } from "react-router-dom";
-import { datastroCustomFetch, nasaCustomFetch, snapiCustomFetch } from "./api";
+import { datastroCustomFetch, nasaCustomFetch, snapiCustomFetch, webbCustomFetch } from "./api";
 
 const newsParams = {
     news_site_exclude: "SpacePolicyOnline.com",
@@ -51,6 +51,17 @@ export const hubblePageLoader: LoaderFunction = async ({ request }): Promise<Hub
 export const apodPageLoader: LoaderFunction = async (): Promise<ApodType | null> => {
 	try {
 		const response = await nasaCustomFetch.get<ApodType>("");
+		return response.data;
+	} catch (error) {
+		console.log(error);
+		return null;
+	}
+};
+
+//config api for webb page
+export const webbPageLoader: LoaderFunction = async (): Promise<ApodType | null> => {
+	try {
+		const response = await webbCustomFetch.get("");
 		return response.data;
 	} catch (error) {
 		console.log(error);
