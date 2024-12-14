@@ -1,6 +1,7 @@
 import { 
 	   ApodType, 
 	   FiltersParams,
+	   HubbleImage,
 	   HubbleImagesResponse,
 	   HubbleImagesResponseWithParams,
 	   News, NewsResponse,
@@ -10,6 +11,7 @@ import {
 	   WebbImage, WebbImagesResponse, WebbNewsAndImagery } from "@/types";
 import { LoaderFunction } from "react-router-dom";
 import { datastroCustomFetch, nasaCustomFetch, snapiCustomFetch, spacexCustomFetch, webbCustomFetch } from "./api";
+import { objectsPerPage } from "../utils";
 
 const newsParams = {
     news_site_exclude: "SpacePolicyOnline.com",
@@ -39,7 +41,7 @@ const newsParams = {
 //config api for hubble page
 const hubbleParams = {
 	order_by: "photo_date_taken desc",
-	limit: 24,
+	limit: objectsPerPage
 };
 
 export const hubblePageLoader: LoaderFunction = async ({ request }): Promise<HubbleImagesResponseWithParams | null> => {
@@ -124,7 +126,7 @@ const newsFetchforSpace  = async():Promise<News[]|null> => {
 	try {
 		
 		const response = await snapiCustomFetch.get<NewsResponse>("", {params: newsParams});
-		return response.data.results;
+		return response.data.results
 	} catch (error) {
 		console.log(error);
 		return null;
@@ -154,6 +156,21 @@ export const spacexPageLoader: LoaderFunction = async ():Promise<SpaceXNewsAndRo
 	try {
 		const [news,rockets] = await Promise.all([newsFetchforSpace(),rocketsFetch()]);
 		return {news,rockets};
+	} catch (error) {
+		console.log(error);
+		return null;
+	}
+};
+
+
+//config api for Sinngle page hubble
+
+
+export const singleHubblePageLoader: LoaderFunction = async ({ params }): Promise<HubbleImage | null> => {
+	try {
+		const formattedParams = { where: params.id ? `photo_id like "${params.id}"` : `` };
+		const response = await datastroCustomFetch.get<HubbleImagesResponse>("", { params: formattedParams });
+		return response.data.results[0];
 	} catch (error) {
 		console.log(error);
 		return null;

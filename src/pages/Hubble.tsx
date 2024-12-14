@@ -1,4 +1,4 @@
-import { CardGrid, FiltersForm, Overview, Title } from "@/components";
+import { CardGrid, FiltersForm, Overview, PaginationContainer, Title } from "@/components";
 import { useLoaderData } from "react-router-dom"
 
 export default function Hubble() {
@@ -11,6 +11,7 @@ export default function Hubble() {
 			<FiltersForm term={params.term} mode="hubble" key={params.term} />
 			<Overview objects={response} />
 			<CardGrid objects={response.results} mode="hubble" />
+			<PaginationContainer/>
 		</section>
 	);
 }
