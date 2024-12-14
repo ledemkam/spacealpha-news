@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Apod, Home, Hubble, Landing, News, Spacex, Webb} from './pages'
+import { Apod, ErrorMain, Home, Hubble, Landing, News, Spacex, Webb} from './pages'
 import { apodPageLoader, hubblePageLoader, newsPageLoader, singleHubblePageLoader, spacexPageLoader, webbPageLoader } from './lib/axios/config'
 import { ErrorElement } from './components'
 import { LandingPageLoader } from './pages/Landing'
@@ -12,6 +12,7 @@ const router = createBrowserRouter([
   {
   path: "/",
   element: <Home/>,
+  errorElement:<ErrorMain/>,
   children: [{
     index: true,
     element: <Landing/>,

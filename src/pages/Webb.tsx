@@ -5,7 +5,6 @@ import { useLoaderData } from "react-router-dom";
 
 export default function Webb() {
   const {news,imagery} = useLoaderData();
-  console.log(imagery);
   return (
     <section>
       <Title title="James Webb space telescope" />

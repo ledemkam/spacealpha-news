@@ -4,7 +4,6 @@ import { useLoaderData } from "react-router-dom"
 
 const Spacex = () => {
   const {news,rockets} = useLoaderData()
-  console.log(rockets);
   
   
   return (

@@ -1,4 +1,4 @@
-import { FiltersForm, Overview, Title } from "@/components";
+import { FiltersForm, Overview, PaginationContainer, Title } from "@/components";
 import CardGrid from "@/components/shared/CardGrid";
 import {  useLoaderData } from "react-router-dom";
 
@@ -17,6 +17,7 @@ export default function News() {
       <FiltersForm term={params.term} mode="news" key={params.term}/>
       <Overview objects={data} /> 
       <CardGrid objects={response.results} mode="news-page" />
+      <PaginationContainer/>
      
     </section>
   )

@@ -20,7 +20,8 @@ export default function Apod() {
 			setData(response.data);
 			setLoading(false);
 		} catch (error) {
-			console.log(error);
+			throw new Error(`Failed to fetch news data: ${error}`);
+;
 			setLoading(false);
 			return null;
 		}

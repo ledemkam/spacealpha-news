@@ -9,7 +9,6 @@ type FilterProps = {
 }
 
 const FiltersForm = ({term,mode}: FilterProps): ReactNode=> {
-  console.log(mode);
   
   return (
     <Form className="my-6 py-2 flex flex-col gap-2">

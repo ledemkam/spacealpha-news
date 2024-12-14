@@ -23,6 +23,8 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      "no-console": "error",
+			"react-refresh/only-export-components": "off",
     },
   },
 )

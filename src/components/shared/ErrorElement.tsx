@@ -1,11 +1,10 @@
 import { useRouteError } from "react-router-dom"
 
 const ErrorElement = () => {
-    const error = useRouteError()
-    console.log(error)
+    const error = useRouteError() as { message?: string }
     
   return (
-    <h4 className="">there was a Error</h4>
+    <h4 className="">There was an error: {error?.message || "Unknown error"}</h4>
   )
 }
 export default ErrorElement
